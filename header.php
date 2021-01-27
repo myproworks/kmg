@@ -1,4 +1,4 @@
-<?php
+    <?php
 /**
  * The header for our theme
  *
@@ -22,9 +22,9 @@
     <!-- Boxed Layout -->
 		<div id="page" class="site boxed-layout"> 
         <!-- Preloader -->
-        <div class="preeloader">
-            <div class="preloader-spinner"></div>
-        </div>
+<!--        <div class="preeloader">-->
+<!--            <div class="preloader-spinner"></div>-->
+<!--        </div>-->
         <!--/ End Preloader -->
         <!-- Header -->
 		<header class="header">
