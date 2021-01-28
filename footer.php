@@ -90,7 +90,9 @@
 				<div class="col-lg-3 col-md-6 col-12">	
 					<!-- Footer Contact -->		
 					<div class="single-widget footer_contact widget">
-						<?php dynamic_sidebar( 'sidebar-footer' )?>	
+						<?php if ( ! dynamic_sidebar( 'footer-1' ) ):?>
+                            <h3>Here is the widget about the last work!</h3>
+						<?php endif; ?>
 						<!-- <h3 class="widget-title">Contact</h3>
 						<p>Beatae vitae dicta sunt explicabo nemo enim ipsam voluptatem</p>
 						<ul class="address-widget-list">

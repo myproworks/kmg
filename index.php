@@ -9,18 +9,28 @@ get_header();
 <section class="hero-slider style1">
 <div class="home-slider">
 <!-- Single Slider -->
-<div class="single-slider" style="background-image:url('https://via.placeholder.com/1700x800.png')">
+<?php
+    $mSlider = new WP_Query( array ( 'post_type' => 'mainSlider' ) );
+
+    if( $mSlider->have_posts() ):
+        while( $mSlider->have_posts() ): $mSlider->the_post();
+
+?>
+<div class="single-slider" style="background-image:url( <?php echo get_the_post_thumbnail_url( $post->ID, 'full' );?>
+        )">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-7 col-md-8 col-12">
 				<div class="welcome-text"> 
 					<div class="hero-text"> 
-						<h4>We are always ready to help you</h4>
-						<h1>Our Creative Designer Waiting for Projects</h1>
+						<h4><?php echo get_the_excerpt(); ?></h4>
+						<h1><?php the_title();?></h1>
 						<div class="p-text">
-							<p>Nunc tincidunt venenatis elit. Etiam venenatis quam vel maximus bibendum Pellentesque elementum dapibus diam tristique</p>
+							<?php the_content();?>
 						</div>
 						<div class="button">
+<!--                            <a href="--><?php //echo get_site_url();?><!--/%d0%bf%d1%80%d0%be-%d0%bd%d0%b0%d1%81/" class="center_btn">Про-->
+<!--                                компанію</a>-->
 							<a href="contact.html" class="bizwheel-btn theme-1 effect">Work with us</a>
 							<a href="portfolio.html" class="bizwheel-btn theme-2 effect">View Our Portfolio</a>
 						</div>
@@ -30,86 +40,18 @@ get_header();
 		</div>
 	</div>
 </div>
+<?php endwhile; endif; wp_reset_query();?>
 <!--/ End Single Slider -->
-	<!-- Single Slider -->
-	<div class="single-slider" style="background-image:url('https://via.placeholder.com/1700x800.png')">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-7 col-md-8 col-12">
-					<div class="welcome-text"> 
-						<div class="hero-text"> 
-							<h4>Your time is so important for us</h4>
-							<h1>Build Your WorldClass Brand with Bizwheel</h1>
-							<div class="p-text">
-								<p>Nunc tincidunt venenatis elit. Etiam venenatis quam vel maximus bibendum Pellentesque elementum dapibus diam tristique</p>
-							</div>
-							<div class="button">
-								<a href="blog.html" class="bizwheel-btn theme-1 effect">Read our blog</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--/ End Single Slider -->
-</div>		
+</div>
 </section>
 <!--/ End Hero Slider -->
 <!-- Features Area -->
-		<section class="features-area section-bg">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-3 col-md-6 col-12">
-						<!-- Single Feature -->
-						<div class="single-feature">
-							<div class="icon-head"><i class="fa fa-podcast"></i></div>
-							<h4><a href="service-single.html">Creative Design</a></h4>
-							<p>Aenean aliquet rutrum enimn scelerisque. Nam dictumanpo, antequis laoreet ullamcorper, velitsd odio scelerisque tod</p>
-							<div class="button">
-								<a href="service-single.html" class="bizwheel-btn"><i class="fa fa-arrow-circle-o-right"></i>Learn More</a>
-							</div>
-						</div>
-						<!--/ End Single Feature -->
-					</div>
-					<div class="col-lg-3 col-md-6 col-12">
-						<!-- Single Feature -->
-						<div class="single-feature">
-							<div class="icon-head"><i class="fa fa-podcast"></i></div>
-							<h4><a href="service-single.html">Quality Service</a></h4>
-							<p>Aenean aliquet rutrum enimn scelerisque. Nam dictumanpo, antequis laoreet ullamcorper, velitsd odio scelerisque tod</p>
-							<div class="button">
-								<a href="service-single.html" class="bizwheel-btn"><i class="fa fa-arrow-circle-o-right"></i>Learn More</a>
-							</div>
-						</div>
-						<!--/ End Single Feature -->
-					</div>
-					<div class="col-lg-3 col-md-6 col-12">
-						<!-- Single Feature -->
-						<div class="single-feature active">
-							<div class="icon-head"><i class="fa fa-podcast"></i></div>
-							<h4><a href="service-single.html">On-time Delivery</a></h4>
-							<p>Aenean aliquet rutrum enimn scelerisque. Nam dictumanpo, antequis laoreet ullamcorper, velitsd odio scelerisque tod</p>
-							<div class="button">
-								<a href="service-single.html" class="bizwheel-btn"><i class="fa fa-arrow-circle-o-right"></i>Learn More</a>
-							</div>
-						</div>
-						<!--/ End Single Feature -->
-					</div>
-					<div class="col-lg-3 col-md-6 col-12">
-						<!-- Single Feature -->
-						<div class="single-feature">
-							<div class="icon-head"><i class="fa fa-podcast"></i></div>
-							<h4><a href="service-single.html">24/7 Live support</a></h4>
-							<p>Aenean aliquet rutrum enimn scelerisque. Nam dictumanpo, antequis laoreet ullamcorper, velitsd odio scelerisque tod</p>
-							<div class="button">
-								<a href="service-single.html" class="bizwheel-btn"><i class="fa fa-arrow-circle-o-right"></i>Learn More</a>
-							</div>
-						</div>
-						<!--/ End Single Feature -->
-					</div>
-				</div>
-			</div>
-		</section>
+<section class="features-area section-bg">
+    <div class="container">
+        <div class="row">
+            <?php get_template_part( 'template-parts/content', 'features' )?>
+        </div>
+    </div>
+</section>
 		<!--/ End Features Area -->
 <?php get_footer();?>
