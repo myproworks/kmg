@@ -160,7 +160,11 @@ add_action( 'wp_enqueue_scripts', 'kmg_scripts' );
 // }
 // add_filter('nav_menu_link_attributes', 'add_classname_to_parent_nav_link', 10, 2);
 
-// Add custom class to <li> if it is a parent.
+
+/**
+ * Add custom class to <li> if it is a parent.
+ * all elements of field "classes" of a menu item get join together and render to class attribute of element in HTML
+ */
 add_filter('wp_nav_menu_objects', function ($items) {
     $hasSub = function ($menu_item_id, &$items) {
         foreach ($items as $item) {
@@ -170,13 +174,13 @@ add_filter('wp_nav_menu_objects', function ($items) {
         }
         return false;
     };
-		// all elements of field "classes" of a menu item get join together and render to class attribute of element in HTML
+
     foreach ($items as &$item) {
         if ($hasSub($item->ID, $items)) {
-            $item->classes[] = 'icon-active'; 
+            $item->classes[] = 'icon-active';
         }
     }
-    return $items;    
+    return $items;
 });
 
 /**
