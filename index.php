@@ -46,6 +46,7 @@ get_header();
 </section>
 <!--/ End Hero Slider -->
 <!-- Features Area -->
+<<<<<<<
 <section class="features-area section-bg">
     <div class="container">
         <div class="row">
@@ -135,4 +136,14 @@ get_header();
     </div>
 </section>
 <!--/ End Portfolio -->
+=======
+<section class="features-area section-bg">
+    <div class="container">
+        <div class="row">
+            <?php get_template_part( 'template-parts/content', 'features' )?>
+        </div>
+    </div>
+</section>
+		<!--/ End Features Area -->
+>>>>>>>
 <?php get_footer();?>

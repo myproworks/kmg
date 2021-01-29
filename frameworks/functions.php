@@ -227,6 +227,7 @@ function kmg_widgets_init(){
 	register_sidebar( $args );
 }
 add_action( 'widgets_init', 'kmg_widgets_init' );
+<<<<<<<
 /**
  *
  */
@@ -318,3 +319,41 @@ function portfolio(){
 	register_taxonomy( 'portfolio', 'our_work', $taxonomy_args );
 }
 add_action( 'init', 'portfolio' );
+=======
+/**
+ *
+ */
+function mainSliderOnHomePage(){
+
+	$args = array (
+		'label'  => null,
+		'labels' => [
+			'name'               => __( 'Slider on the home page', 'kmg' ),
+			'singular_name'      => __( 'Slider', 'kmg' ),
+			'add_new'            => __( 'Add a slide', 'kmg' ),
+			'add_new_item'       => __( 'Adding a new slide', 'kmg' ),
+			'edit_item'          => __( 'Edit slide', 'kmg' ),
+			'new_item'           => __( 'New Slide', 'kmg' ),
+			'view_item'          => __( 'View slide', 'kmg' ),
+			'search_items'       => __( 'Search slide', 'kmg' ),
+			'not_found'          => __( 'Not found', 'kmg' ),
+			'not_found_in_trash' => __( 'Not found in trash', 'kmg' ),
+			'menu_name'          => __( 'Main Slider', 'kmg' ),
+		],
+		'description'         => '',
+		'public'              => true,
+		'show_in_menu'        => null,
+		'menu_position'       => 10,
+		'menu_icon'           => 'dashicons-format-video',
+		'hierarchical'        => false,
+		'supports'            => [ 'title', 'editor','thumbnail','excerpt' ],
+		'taxonomies'          => [],
+		'has_archive'         => false,
+		'rewrite'             => true,
+		'query_var'           => true,
+	);
+
+	register_post_type( 'mainSlider', $args );
+}
+add_action( 'init', 'mainSliderOnHomePage' );
+>>>>>>>
