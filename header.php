@@ -1,4 +1,4 @@
-<?php
+    <?php
 /**
  * The header for our theme
  *
@@ -22,9 +22,9 @@
     <!-- Boxed Layout -->
 		<div id="page" class="site boxed-layout"> 
         <!-- Preloader -->
-        <div class="preeloader">
-            <div class="preloader-spinner"></div>
-        </div>
+<!--        <div class="preeloader">-->
+<!--            <div class="preloader-spinner"></div>-->
+<!--        </div>-->
         <!--/ End Preloader -->
         <!-- Header -->
 		<header class="header">
@@ -36,7 +36,8 @@
 							<!-- Top Contact -->
 							<div class="top-contact">
 								<div class="single-contact"><i class="fa fa-phone"></i>Phone: +(600) 125-4985-214</div> 
-								<div class="single-contact"><i class="fa fa-envelope-open"></i>Email: info@yoursite.com</div>	
+								<div class="single-contact"><i class="fa fa-envelope-open"></i>
+                                    Email: <?php bloginfo( 'admin_email' )?></div>
 								<div class="single-contact"><i class="fa fa-clock-o"></i>Opening: 08AM - 09PM</div> 
 							</div>
 							<!-- End Top Contact -->
@@ -51,7 +52,7 @@
 									<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
 								</ul>															
 								<div class="button">
-									<a href="contact.html" class="bizwheel-btn">Get a Quote</a>
+									<a href="contact.html" class="bizwheel-btn">Contact Us</a>
 								</div>
 							</div>
 						</div>
@@ -92,8 +93,8 @@
 																		'theme_location'=> 'menu-1',
 																		'depth'         => 2,
 																		'fallback_cb'   => false,
-																		'menu_id'				=> 'nav',
-																		'menu_class'		=> 'nav main-menu menu navbar-nav',
+																		'menu_id'	    => 'nav',
+																		'menu_class'	=> 'nav main-menu menu navbar-nav',
 																		);
 																wp_nav_menu($args);
 															?>
@@ -108,7 +109,7 @@
 												<!-- Search Bar -->
 												<ul class="right-nav">
 													<li class="top-search"><a href="#0"><i class="fa fa-search"></i></a></li>
-													<li class="bar"><a class="fa fa-bars"></a></li>
+<!--													<li class="bar"><a class="fa fa-bars"></a></li>-->
 												</ul>
 												<!--/ End Search Bar -->
 												<!-- Search Form -->

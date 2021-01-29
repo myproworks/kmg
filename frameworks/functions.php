@@ -9,6 +9,13 @@ if ( ! function_exists( 'kmg_setup' ) ) :
 	 * as indicating support for post thumbnails.
 	 */
 	function kmg_setup() {
+		/**
+		 * Load up our required theme files.
+		 */
+		require( get_template_directory() . '/frameworks/widgets/widget_about.php' );
+		require( get_template_directory() . '/frameworks/widgets/widget_contact.php' );
+
+
 		/*
 		 * Make theme available for translation.
 		 * Translations can be filed in the /languages/ directory.
@@ -160,7 +167,11 @@ add_action( 'wp_enqueue_scripts', 'kmg_scripts' );
 // }
 // add_filter('nav_menu_link_attributes', 'add_classname_to_parent_nav_link', 10, 2);
 
-// Add custom class to <li> if it is a parent.
+/**
+ * Add custom class to <li> if it is a parent.
+ * all elements of field "classes" of a menu item get join together and render to class attribute of element in HTML
+ */
+
 add_filter('wp_nav_menu_objects', function ($items) {
     $hasSub = function ($menu_item_id, &$items) {
         foreach ($items as $item) {
@@ -170,13 +181,13 @@ add_filter('wp_nav_menu_objects', function ($items) {
         }
         return false;
     };
-		// all elements of field "classes" of a menu item get join together and render to class attribute of element in HTML
+
     foreach ($items as &$item) {
         if ($hasSub($item->ID, $items)) {
-            $item->classes[] = 'icon-active'; 
+            $item->classes[] = 'icon-active';
         }
     }
-    return $items;    
+    return $items;
 });
 
 /**
@@ -190,8 +201,8 @@ function kmg_widgets_init(){
 		'id'            => "sidebar-1",
 		'description'   => '',
 		'class'         => '',	
-		'before_widget' => '<li id="%1$s" class="widget %2$s">',
-		'after_widget'  => "</li>\n",
+//		'before_widget' => '<li id="%1$s" class="widget %2$s">',
+//		'after_widget'  => "</li>\n",
 		'before_title'  => '<h3 class="widget-title">',
 		'after_title'   => "</h3>\n",
 		'before_sidebar' => '', 
@@ -202,11 +213,11 @@ function kmg_widgets_init(){
 
 	$args = array( 
 		'name'          => esc_html__( 'Footer', 'kmg' ),
-		'id'            => "sidebar-footer",
+		'id'            => 'footer-1',
 		'description'   => '',
 		'class'         => '',	
-		'before_widget' => '<li id="%1$s" class="widget %2$s">',
-		'after_widget'  => "</li>\n",
+//		'before_widget' => '<li id="%1$s" class="widget %2$s">',
+//		'after_widget'  => "</li>\n",
 		'before_title'  => '<h3 class="widget-title">',
 		'after_title'   => "</h3>\n",
 		'before_sidebar' => '', 
@@ -216,3 +227,133 @@ function kmg_widgets_init(){
 	register_sidebar( $args );
 }
 add_action( 'widgets_init', 'kmg_widgets_init' );
+<<<<<<<
+/**
+ *
+ */
+function mainSliderOnHomePage(){
+
+	$args = array (
+		'label'  => null,
+		'labels' => [
+			'name'               => __( 'Slider on the home page', 'kmg' ),
+			'singular_name'      => __( 'Slider', 'kmg' ),
+			'add_new'            => __( 'Add a slide', 'kmg' ),
+			'add_new_item'       => __( 'Adding a new slide', 'kmg' ),
+			'edit_item'          => __( 'Edit slide', 'kmg' ),
+			'new_item'           => __( 'New Slide', 'kmg' ),
+			'view_item'          => __( 'View slide', 'kmg' ),
+			'search_items'       => __( 'Search slide', 'kmg' ),
+			'not_found'          => __( 'Not found', 'kmg' ),
+			'not_found_in_trash' => __( 'Not found in trash', 'kmg' ),
+			'menu_name'          => __( 'Main Slider', 'kmg' ),
+		],
+		'description'         => '',
+		'public'              => true,
+		'show_in_menu'        => null,
+		'menu_position'       => 10,
+		'menu_icon'           => 'dashicons-format-video',
+		'hierarchical'        => false,
+		'supports'            => [ 'title', 'editor','thumbnail','excerpt' ],
+		'taxonomies'          => [],
+		'has_archive'         => false,
+		'rewrite'             => true,
+		'query_var'           => true,
+	);
+
+	register_post_type( 'mainSlider', $args );
+}
+add_action( 'init', 'mainSliderOnHomePage' );
+
+function portfolio(){
+	$args = array(
+		'label'  => null,
+		'labels' => [
+			'name'               => __( 'Pictures of your portfolio', 'kmg' ),
+			'singular_name'      => __( 'Picture', 'kmg' ),
+			'add_new'            => __( 'Add a picture', 'kmg' ),
+			'add_new_item'       => __( 'Adding a new picture', 'kmg' ),
+			'edit_item'          => __( 'Edit work', 'kmg' ),
+			'new_item'           => __( 'New picture', 'kmg' ),
+			'view_item'          => __( 'View picture', 'kmg' ),
+			'search_items'       => __( 'Search picture', 'kmg' ),
+			'not_found'          => __( 'Not found', 'kmg' ),
+			'not_found_in_trash' => __( 'Not found in trash', 'kmg' ),
+			'menu_name'          => __( 'Portfolio', 'kmg' ),
+		],
+		'description'         => '',
+		'public'              => true,
+		'show_in_menu'        => null,
+		'menu_position'       => 10,
+		'menu_icon'           => 'dashicons-images-alt',
+		'hierarchical'        => false,
+		'supports'            => [ 'title', 'editor','thumbnail','excerpt' ],
+		'taxonomies'          => ['portfolio'],
+		'has_archive'         => false,
+		'rewrite'             => true,
+		'query_var'           => true,
+	);
+	register_post_type( 'our_work', $args );
+
+	$taxonomy_args = array(
+		'label'                 => '', 
+		'labels'                => [
+			'name'              => __( 'Categories', 'kmg' ),
+			'singular_name'     => __( 'Genre', 'kmg' ),
+			'search_items'      => __( 'Search Genres', 'kmg' ),
+			'all_items'         => __( 'All Genres', 'kmg' ),
+			'view_item '        => __( 'View Genre', 'kmg' ),
+			'parent_item'       => 'Parent Genre',
+			'parent_item_colon' => 'Parent Genre:',
+			'edit_item'         => __( 'Edit Genre', 'kmg' ),
+			'update_item'       => __( 'Update Genre', 'kmg' ),
+			'add_new_item'      => __( 'Add New Genre', 'kmg' ),
+			'new_item_name'     => __( 'New Genre Name', 'kmg' ),
+			'menu_name'         => __( 'Categories', 'kmg' ),
+		],
+		'description'           => '', 
+		'public'                => true,
+		'hierarchical'          => true,
+	);
+
+	register_taxonomy( 'portfolio', 'our_work', $taxonomy_args );
+}
+add_action( 'init', 'portfolio' );
+=======
+/**
+ *
+ */
+function mainSliderOnHomePage(){
+
+	$args = array (
+		'label'  => null,
+		'labels' => [
+			'name'               => __( 'Slider on the home page', 'kmg' ),
+			'singular_name'      => __( 'Slider', 'kmg' ),
+			'add_new'            => __( 'Add a slide', 'kmg' ),
+			'add_new_item'       => __( 'Adding a new slide', 'kmg' ),
+			'edit_item'          => __( 'Edit slide', 'kmg' ),
+			'new_item'           => __( 'New Slide', 'kmg' ),
+			'view_item'          => __( 'View slide', 'kmg' ),
+			'search_items'       => __( 'Search slide', 'kmg' ),
+			'not_found'          => __( 'Not found', 'kmg' ),
+			'not_found_in_trash' => __( 'Not found in trash', 'kmg' ),
+			'menu_name'          => __( 'Main Slider', 'kmg' ),
+		],
+		'description'         => '',
+		'public'              => true,
+		'show_in_menu'        => null,
+		'menu_position'       => 10,
+		'menu_icon'           => 'dashicons-format-video',
+		'hierarchical'        => false,
+		'supports'            => [ 'title', 'editor','thumbnail','excerpt' ],
+		'taxonomies'          => [],
+		'has_archive'         => false,
+		'rewrite'             => true,
+		'query_var'           => true,
+	);
+
+	register_post_type( 'mainSlider', $args );
+}
+add_action( 'init', 'mainSliderOnHomePage' );
+>>>>>>>
