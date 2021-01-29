@@ -53,5 +53,86 @@ get_header();
         </div>
     </div>
 </section>
-		<!--/ End Features Area -->
+<!--/ End Features Area -->
+<!-- Portfolio -->
+<section class="portfolio section-space">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-12">
+                <div class="section-title default text-center">
+                    <div class="section-top">
+                        <h1>portfolio Name</h1>
+                    </div>
+                    <div class="section-bottom">
+                        <div class="text">portfolio Name</div>
+                    </div>
+                </div>
+                portfolio
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="portfolio-menu">
+                    <!-- Portfolio Nav -->
+                    <ul id="portfolio-nav" class="portfolio-nav tr-list list-inline cbp-l-filters-work">
+                        <li data-filter="*" class="cbp-filter-item active">All</li>
+	                    <?php
+	                    $args = ['taxonomy' => 'portfolio' ];
+	                    $terms = get_terms( $args );
+	                    foreach( $terms as $term ):
+	                    ?>
+                            <li data-filter=".<?php echo $term->slug?>" class="cbp-filter-item">
+                                <?php echo $term->name; ?>
+                            </li>
+                        <?php endforeach;?>
+                    </ul>
+	                <!--/ End Portfolio Nav -->
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="portfolio-main">
+                    <div id="portfolio-item" class="portfolio-item-active">
+	                    <?php
+                        $args = ['taxonomy' => 'portfolio' ];
+                        $terms = get_terms( $args );
+                        foreach( $terms as $term ):
+                            $data = array ( 'post_type'=> 'our_work',
+                                             'tax_query' => array(
+	                                             array(
+		                                             'taxonomy' => 'portfolio',
+		                                             'field' => 'slug',
+		                                             'terms' => $term->slug
+	                                             )
+                                             ),
+                                             'posts_per_page'    => 10,);
+	                    $ourWorks = new WP_Query( $data);
+	                    if( $ourWorks->have_posts() ):
+                            while( $ourWorks->have_posts() ): $ourWorks->the_post();
+	                    ?>
+                        <div class="cbp-item <?php echo $term->slug?> animation">
+                            <!-- Single Portfolio -->
+                            <div class="single-portfolio">
+                                <div class="portfolio-head overlay">
+                                    <?php the_post_thumbnail();?>
+                                    <a class="more" href="<?php the_permalink();?>">
+                                        <i class="fa fa-long-arrow-right"></i></a>
+                                </div>
+                                <div class="portfolio-content">
+                                    <h4><a href="<?php the_permalink();?>"><?php the_title();?></a></h4>
+                                    <p><?php echo $term->name?></p>
+                                </div>
+                            </div>
+                            <!--/ End Single Portfolio -->
+                        </div>
+                        <?php endwhile; endif; endforeach; wp_reset_query();?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/ End Portfolio -->
 <?php get_footer();?>

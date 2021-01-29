@@ -263,3 +263,58 @@ function mainSliderOnHomePage(){
 	register_post_type( 'mainSlider', $args );
 }
 add_action( 'init', 'mainSliderOnHomePage' );
+
+function portfolio(){
+	$args = array(
+		'label'  => null,
+		'labels' => [
+			'name'               => __( 'Pictures of your portfolio', 'kmg' ),
+			'singular_name'      => __( 'Picture', 'kmg' ),
+			'add_new'            => __( 'Add a picture', 'kmg' ),
+			'add_new_item'       => __( 'Adding a new picture', 'kmg' ),
+			'edit_item'          => __( 'Edit work', 'kmg' ),
+			'new_item'           => __( 'New picture', 'kmg' ),
+			'view_item'          => __( 'View picture', 'kmg' ),
+			'search_items'       => __( 'Search picture', 'kmg' ),
+			'not_found'          => __( 'Not found', 'kmg' ),
+			'not_found_in_trash' => __( 'Not found in trash', 'kmg' ),
+			'menu_name'          => __( 'Portfolio', 'kmg' ),
+		],
+		'description'         => '',
+		'public'              => true,
+		'show_in_menu'        => null,
+		'menu_position'       => 10,
+		'menu_icon'           => 'dashicons-images-alt',
+		'hierarchical'        => false,
+		'supports'            => [ 'title', 'editor','thumbnail','excerpt' ],
+		'taxonomies'          => ['portfolio'],
+		'has_archive'         => false,
+		'rewrite'             => true,
+		'query_var'           => true,
+	);
+	register_post_type( 'our_work', $args );
+
+	$taxonomy_args = array(
+		'label'                 => '', 
+		'labels'                => [
+			'name'              => __( 'Categories', 'kmg' ),
+			'singular_name'     => __( 'Genre', 'kmg' ),
+			'search_items'      => __( 'Search Genres', 'kmg' ),
+			'all_items'         => __( 'All Genres', 'kmg' ),
+			'view_item '        => __( 'View Genre', 'kmg' ),
+			'parent_item'       => 'Parent Genre',
+			'parent_item_colon' => 'Parent Genre:',
+			'edit_item'         => __( 'Edit Genre', 'kmg' ),
+			'update_item'       => __( 'Update Genre', 'kmg' ),
+			'add_new_item'      => __( 'Add New Genre', 'kmg' ),
+			'new_item_name'     => __( 'New Genre Name', 'kmg' ),
+			'menu_name'         => __( 'Categories', 'kmg' ),
+		],
+		'description'           => '', 
+		'public'                => true,
+		'hierarchical'          => true,
+	);
+
+	register_taxonomy( 'portfolio', 'our_work', $taxonomy_args );
+}
+add_action( 'init', 'portfolio' );
